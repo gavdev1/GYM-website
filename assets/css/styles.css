@@ -1,0 +1,594 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Red+Hat+Display:wght@400;700;900&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+  
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(79, 72%, 55%);
+  --first-color-light: hsl(79, 97%, 77%);
+  --first-color-alt: hsl(79, 67%, 52%);
+  --first-color-dark: hsl(79, 63%, 50%);
+  --first-color-gray: hsl(79, 6%, 64%);
+  --title-color: hsl(180, 4%, 98%);
+  --title-color-black: hsl(180, 4%, 12%);
+  --text-color: hsl(180, 4%, 72%);
+  --text-color-light: hsl(180, 4%, 65%);
+  --body-color: hsl(180, 12%, 8%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Red Hat Display', sans-serif;
+  --second-font: 'Kaushan Script', cursive;
+  --biggest-font-size: 2rem;
+  --bigger-font-size: 1.5rem;
+  --big-font-size: 1.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-bold: 700;
+  --font-black: 900;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/* Responsive typography */
+@media screen and (min-width: 1024px) {
+  :root {
+    --biggest-font-size: 6rem;
+    --bigger-font-size: 3.5rem;
+    --big-font-size: 2.75rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+h1, h2, h3 {
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1124px;
+  margin: 0 auto;
+  padding-inline: 1em;
+}
+
+.desc{
+  width: 75%;
+  margin: 0 auto;
+}
+
+.section__data {
+  display: flex;
+  flex-direction: column;
+  row-gap: .75rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section__title, 
+.section__title-border {
+  font-size: var(--big-font-size);
+  letter-spacing: 1.5px;
+}
+
+.section__subtitle {
+  font-size: var(--h2-font-size);
+  font-family: var(--second-font);
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  color: var(--first-color);
+  transform: rotate(-2deg);
+}
+
+.section__titles {
+  display: flex;
+  column-gap: .75rem;
+  justify-content: center;
+}
+
+.section__title-border {
+  -webkit-text-stroke: 1px var(--text-color);
+  color: transparent;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.main {
+  overflow: hidden; /* For animation ScrollReveal */
+}
+
+.color-red {
+  color: hsl(0, 80%, 64%);
+}
+
+.color-green {
+  color: var(--first-color);
+}
+
+/*=============== HEADER & NAV ===============*/
+.header{
+  background-color: var(--body-color);
+  position: fixed;
+  z-index: var(--z-fixed);
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.nav__logo{
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+  color: var(--title-color);
+  font-weight: bold;
+}
+.nav__logo-img{
+  width: 30px;
+}
+
+.menu{
+  position: absolute;
+  width: 60%;
+  height: 100vh;
+  top: 0;
+  right: -1000%;
+  border-left: 2px solid #777;
+  backdrop-filter: blur(10px);
+  transition: right 1s;
+}
+
+.menu__close{
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  color: var(--text-color);
+  font-size: 2em;
+}
+
+.menu__element{
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+  padding: 9em 0 0 2em;
+}
+
+.menu__item{
+  margin-top: 7em;
+}
+
+.button{
+  padding: 1em 2em;
+  background-color: var(--text-color);
+  font-weight: var(--font-bold);
+  color: #000;
+  align-self: start;
+}
+
+.nav__bar{
+  font-size: 2em;
+}
+
+/* Show menu */
+.show-menu{
+  right: 0;
+}
+
+/* Change background header */
+
+
+/* Active link */
+
+
+/*=============== HOME ===============*/
+.home{
+  text-align: center;
+  margin-top: 8em;
+
+}
+
+.home__title{
+  font-size: var(--biggest-font-size);
+  margin-bottom: .5em;
+}
+
+.button--green{
+  display: inline-flex;
+  align-items: center;
+  gap: 1em;
+  margin-block: 2em;
+  background-color: var(--first-color);
+}
+
+.hero__image-img{
+  width: 300px;
+  margin: 0 auto;
+}
+
+.logos{
+  margin-top: 2em;
+  display: none;
+}
+
+.subtitle{
+  text-align: center;
+  color: var(--first-color);
+  font-family: var(--second-font);
+  margin-top: 4em;
+  font-size: var(--h2-font-size);
+}
+
+.title{
+  font-weight: var(--font-bold);
+  font-size: var(--bigger-font-size);
+  margin-top: 1em;
+  text-align: center;
+}
+
+.title--stroke{
+  -webkit-text-stroke: var(--text-color) 1px;
+  color: transparent;
+}
+
+.program{
+  margin-top: 3em;
+  grid-template-columns: 260px;
+  justify-content: center;
+}
+
+.program-card{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: hsla(79, 6%, 65%, .07);
+  padding: 1em 1.5em 4em;
+}
+
+.program-card__img{
+  width: 50px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  padding: 0.5em;
+}
+
+.program-card__title{
+  margin-bottom: 0.5em;
+}
+
+/*=============== LOGOS ===============*/
+
+
+/*=============== PROGRAM ===============*/
+
+
+/*=============== CHOOSE ===============*/
+.grid__image{
+  margin: 4em auto;
+}
+
+.grid__image-img{
+  width: 300px;
+}
+
+.choose__content{
+  text-align: center;
+  margin-top: 3em;
+}
+
+.choose__numbers{
+  margin-top: 2em;
+  grid-template-columns: repeat(2, 1fr);
+  color: var(--title-color);
+}
+
+.choose__numbers-title{
+  font-size: var(--big-font-size);
+  font-family: var(--second-font);
+}
+
+/*=============== PRICING ===============*/
+.pricing{
+  margin-top: 4em;
+  grid-template-columns: 260px;
+  justify-content: center;
+}
+
+.pricing__card{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: hsla(79, 6%, 65%, .07);
+  padding: 1em 1.5em 4em;
+
+}
+
+.pricing__card-img{
+  width: 50px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  padding: 0.5em;
+}
+
+.pricing__card-title{
+  margin-block: 1em;
+  text-transform: uppercase;
+}
+
+.pricing__card-price{
+  color: var(--title-color);
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-bold);
+}
+
+.feactures{
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5em;
+  list-style-image: url("../img/checkbox-circle-line.png");
+  list-style-position: inside;
+  padding: 0;
+}
+
+.feactures__item--disable{
+  opacity: 0.3;
+}
+
+.button--price{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+}
+
+.pricing__card--green{
+  background-color: var(--first-color);
+  color: #000;
+}
+
+.pricing__card-price--black{
+  color: #000;
+}
+
+.pricing__card-button{
+  display: flex;
+  justify-content: center;
+}
+
+/*=============== CALCULATE ===============*/
+.calculate{
+  text-align: center;
+}
+
+.bmi__input{
+  padding: 1em 2em;
+  background-color: transparent;
+  border: 2px solid var(--first-color);
+  outline: none;
+  color: var(--text-color);
+}
+
+.button--ibm{
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.desc--calculate{
+  margin-block: 1em;
+  text-align: center;
+}
+
+.calculate-container{
+  align-items: center;
+  margin-top: 4em;
+}
+
+.bmit__result{
+  color: var(--first-color);
+  font-weight: var(--font-bold);
+}
+
+/*=============== FOOTER ===============*/
+
+
+.footer__contact-text{
+  margin-block: 1em;
+  color: var(--title-color);
+}
+
+.footer__menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1em auto;
+}
+
+.footer__menu-title{
+  text-transform: uppercase;
+  color: var(--title-color);
+  margin-bottom: 1em;
+}
+
+.footer__menu-item{
+  margin-bottom: 1em;
+}
+
+.footer__widget{
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.social{
+  margin-block: 2em;
+  font-size: 1.5em;
+  padding: 1em;
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  color: #000;
+}
+
+.social i{
+  background-color: var(--first-color);
+  border-radius: 50%;
+  padding: 0.5em;
+}
+
+
+/*=============== SCROLL BAR ===============*/
+
+
+/*=============== SCROLL UP ===============*/
+
+
+/* Show Scroll Up*/
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+
+
+/* For medium devices */
+
+@media(min-width: 550px){
+  .logos{
+    grid-template-columns: repeat(4, 1fr);
+    display: grid;
+  }
+
+  .program{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bmi{
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 2em;
+  }
+}
+
+@media(min-width: 768px){
+  .menu{
+    position: initial;
+    border: none;
+    height: unset;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .menu__close{
+    display: none;
+  }
+
+  .menu__element{
+    flex-direction: row;
+    align-items: center;
+    column-gap: 2em;
+    padding: 0;
+  }
+
+  .nav__bar{
+    display: none;
+  }
+
+  .desc{
+    width: 100%;
+  }
+
+  .home{
+    grid-template-columns: repeat(2, 1fr);
+    text-align: left;
+  }
+
+  .hero__image-img,
+  .grid__image-img{
+    width: 100%;
+  }
+
+  .program{
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid-element,
+  .footer{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title--left,
+  .subtitle--left,
+  .choose__content,
+  .desc--calculate{
+    text-align: left;
+  }
+
+  .pricing,
+  .footer__widget{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* For large devices */
